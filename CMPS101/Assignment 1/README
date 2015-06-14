@@ -1,0 +1,30 @@
+Jason Ou (1385128)
+Date: 15 April 2015
+CS101 Spring 2015
+
+***IMPORTANT*** To run all of these tests, do "make testall" ***IMPORTANT***
+
+==================== ABOUT ====================
+This program is a simple implementation of a graph in C.
+It is only able to take in a file and output a graph using
+the given file.
+
+==================== USAGE ====================
+--- There are 6 test files submitted. ---
+
+1. testEmpty.in
+	- File has no edges, only states the number of vertices.
+2. testMultiNodes.in
+	- File tests pushing in multiple edges.
+3. testOneNode.in
+	- File tests for only one edge.
+4. testRepeatNumbers.in
+	- File tests for repeated edges and makes sure they dont get inputted.
+5. testZero.in
+	- File tests for in the case of trying to input 0
+6. testInvalidEdges.in
+	- File tests for invalid edges
+
+--- Other working tests ---
+1. Program will check for invalid file name.
+2. Program will check for no file input.

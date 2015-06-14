@@ -1,0 +1,28 @@
+###########################################
+# Name: Jason Ou
+# Class: CMPS012B
+# Date: December 8, 2014
+# Filename: README
+# Description: List of files being submitted
+############################################ 
+
+----------------------------------------------------------------------
+# Files being submitted:
+
+# README
+# design.txt
+# Makefile
+# cyoa.java
+# demo.adventure
+----------------------------------------------------------------------
+# To Win, Choose: b a a c a a a a
+----------------------------------------------------------------------
+# Extra Credit Features:
+
+# Secret Konami code, instead of entering an option, enter "^^VV<><>BA"
+# to gain access to all rooms in the game.
+
+# Added color coding for the game
+
+# Added player option that chooses a random choice for the lazy adventurer
+----------------------------------------------------------------------

@@ -1,0 +1,136 @@
+# Name: Jason Ou
+# Class: CMPS012B
+# Date: December 8, 2014
+# Filename: demo.adventure
+# Description: Game file
+
+r bed
+d THUD.
+d Your eyes open when you notice that the door to your room is open wide. You didn't leave it like that...
+o Call out
+t silence
+o Check phone
+t phone
+o Get out of bed to check
+t door
+
+r silence
+d There is no response. You live alone what were you expecting?
+o Call out again
+t more silence
+o Check phone
+t phone
+
+r more silence
+d Even though you know no one is there, you scream again.
+d Still nothing. Come on. 
+o Check phone
+t phone
+
+r phone
+d You check your phone for the time. 
+o Go on internet
+t internet
+o Get out of bed
+t door
+
+r door
+d Ugh. You somehow got up out of bed and to the door. Nothing out of the ordinary.
+o Get back in bed
+t bed back
+o Open up computer at desk
+t internet
+
+r bed back
+d Mmm. Cozy and warm.
+o Use internet on phone
+t internet
+o Go back to sleep
+t nap
+
+r internet
+d You end up surfing the internet for thirty minutes. How does this always happen? You will never know.
+d Alright, time to get moving I think. What day is today anyway?
+o Check the date
+t date
+o Eh, who cares? Sleep for ten minutes. 
+t nap
+
+r date
+d Oh no. It's Wednesday and your CMPS final starts soon!! 
+d To make matters worse, your stomach just growled. 
+o RUSH OUT OF BED I HAVE TO GET THERE
+t rush
+o You didn't even study, might as well get some sleep.
+t sleep
+o Eat some breakfast
+t eat
+
+r nap
+d What a great nap... Alright time to check the time.
+o Check the date
+t date
+
+r sleep
+d You wake up after a brief 10 minute nap. 
+o Now it's time to rush. 
+t rush
+o Eat some food
+t eat
+
+r eat
+d Mom always said breakfast is the most important meal of the day. Let's hope this saves me.
+o Eat breakfast.
+t find
+
+r find
+d You feel so much better now that you have eaten. Now time to go.
+d While walking out the door, you realize that you forgot a scantron. Uh oh. You already owe your friends so many scantrons...
+o Grab a scantron on the way out
+t scantron
+o Eh, one more can't hurt. 
+t rush
+
+r rush
+d You put on all of your clothes in a record breaking time and rush out the door. 
+d Huffing and puffing, you make it into your class and take a seat.
+d Professor Whitehead walks to the front of the room and asks everyone to take out a scantron.
+d OH UH.
+o Ask around you for a scantron
+t peers
+o Ask the professor for a scantron
+t prof
+
+r scantron
+d You walk into class prepared, yet still huffing and puffing from the stairs. 
+d Professor Whitehead walks to the front of the room and asks everyone to take out a scantron.
+o TAKE TEST.
+t test
+
+r peers
+d You decide to ask your friends for a scantron. They're probably really annoyed at you since this is your fifth time forgetting one but this is the final!
+d Luckily, the person sitting next to you pulls through and takes out an extra scantron.
+o Take test
+t meh
+
+r prof
+d You go up to the professor and try to mumble something about not having a scantron.
+d He is used to this, and reminds you that he is selling scantrons for $15.
+o Empty out wallet and start test.
+t meh
+
+r test
+d It was a good thing you ate. Your mind is as sharp as a sword as you demolish every test question thrown at you.
+o Turn in finished test.
+t done
+
+r meh
+d You were so hungry during the test you could barely think straight... and the people next to you kept giving you weird looks when your stomach wouldn't stop growling.
+d You didn't do so well on your test. 
+d Better luck next time?
+d [Press r to Restart]
+
+r done
+d You somehow managed to get to your test on time and save your grade. 
+d Maybe you should get an alarm clock next time.... But CONGRATULATIONS!
+d YOU WIN!

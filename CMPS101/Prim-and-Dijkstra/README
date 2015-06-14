@@ -1,0 +1,56 @@
+Jason Ou (jaou - 1385128)
+Date: 3 June 2015
+CS101 Spring 2015
+README
+
+***** TO TEST THE PROGRAM USING MAKE *****
+>>>	  "make testp" to test Prim.       <<<
+>>>	  "make testd" to test Dijkstra.   <<<
+******************************************
+
+==================== ABOUT ====================
+
+This program will implement:
+	-Prim's Minimum Spanning Tree Algorithm (MST)
+	-Dijkstra's Shortest-Path Algorithm (SSSP)
+
+The graphs will either be a Directed or Undirected graph:
+	-Prim MST is an Undirected graph
+	-Dijkstra SSSP is a Directed graph
+	
+Extra Files Provided:
+	-Input files: "input1.in", "input2.in", "input3.in"
+	-Log files: "input3.log"
+
+==================== USAGE ====================
+
+Usage: ./graph04 [-P / -D] [# start vertex] [input.in / -]
+
+Argv[0] Should be calling the program
+Argv[1] Should be either options -P or -D where -P indicates using MST
+		and -D indicates SSSP
+Argv[2] Should be the start vertex
+Argv[3] Should be either an input file or - which indicates reading from stdin
+
+==================== OUTPUT ====================
+
+Using input from a file that I submitted: "input3.in",
+and the command-line command: "graph04 -P 1 input3.in",
+I got the output in the file that I submitted: "input3.log"
+
+==================== MAKEFILE ====================
+
+make or make graph04:
+	-compiles graph04 to be used
+
+make testp:
+	-tests Prim using "input3.in"
+	
+make testd:
+	-test Dijkstra using "input3.in"
+
+make clean:
+	-cleans up all of the .o files by removing them
+	
+make submit:
+	-submits files to class folder

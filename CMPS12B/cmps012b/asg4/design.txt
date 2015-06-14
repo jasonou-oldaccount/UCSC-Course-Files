@@ -1,0 +1,84 @@
+###########################################
+# Name: Jason Ou
+# Class: CMPS012B
+# Date: December 8, 2014
+# Filename: design.txt
+# Description: Design Document that explains how project is organized and comments about ADTs used.
+############################################
+
+-----------------------------------------------------------------------------
+
+Our game project implements a 2D array. When beginning this project, we were deciding between 
+a 2D array and a doubly linked list. We agreed that the 2D array would be easier to implement, 
+but a drawback would be the inability of the array to grow and shrink in size, unlike a linked 
+list. The solution to the drawback was making the size of the array [1000][1000] since it is
+likely that no one will create an adventure that will take up all of this space (at least for
+this class assignment).
+
+PARSES FILE ITEMS: (r d o t)
+	public static String[][] data = new String[1000][1000]; 
+
+We also built another array to keep track of user options, and another to keep track of rooms
+and corresponding tags. 
+
+------------ Keeps track of the options the user has made:------------ 
+	public static String[] userOptions = new String[1000]; 
+This array is implemented like a stack, where the options are "popped" and "pushed" as a
+stack does. Whenever a move is undone, the last move the user made is "popped" and then they 
+return to the room that is currently on top of the stack. 
+Instead of keeping track of the player options, we kept track of the rooms they entered, 
+making it easier to go from room to room. 
+	
+------------ Keeps track of the rooms and tags for option 'y' : ------------ 
+	public static String[] orderData;
+When y is pressed in game, a list of rooms available and they're connected tags are printed
+(in alphabetical order).
+
+------------ Keeps track of all the rooms in the game: ------------ 
+	public static String[] roomChecker = new String[100]; 
+
+-------------------------------------------
+The main method is where the game is uploaded and played. Once the game has found a valid file, 
+parsed it, and uploaded it, the player can play by typing in the letter next to the options 
+they can choose.
+
+********* EXAMPLE [demo.adventure] : STARTED WITH "make test"
+
+javac -Xlint cyoa.java
+java cyoa demo.adventure
+
+THUD.
+
+Your eyes open when you notice that the door to your room is open wide. You didn't leave it like that..
+
+a -- Call out
+b -- Check phone
+c -- Get out of bed to check
+d -- Random move.
+
+a 										[USER INPUT]
+
+[Call out]
+
+There is no response. You live alone what were you expecting?
+
+a -- Call out again
+b -- Check phone
+c -- Random move.
+
+*********************************
+
+In addition to the options in the game, the player can also be transported to a random room
+with the "Random room" option, which comes after the game options (a-l). 
+The game options are:
+r : restart the game
+y : information about rooms and tags connected to each room
+q : quits game
+
+The player also has the ability to enter a cheat mode by typing in the konami code: ^^VV<><>BA
+This allows the player to enter any room they please. It is just a fun addition we added for 
+extra credit, but the 2D array made this easy to implement.  
+CHEAT CODE
+	public static boolean konami = false; 
+
+-----------------------------------------------------------------------------

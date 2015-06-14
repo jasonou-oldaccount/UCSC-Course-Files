@@ -1,0 +1,35 @@
+body {
+    background-color: #E6E6E6;
+}
+
+p {
+    text-indent: 40px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.grid .tick {
+    stroke: #000;
+    stroke-opacity: 0.2;
+    shape-rendering: crispEdges;
+}
+
+.grid path {
+    stroke-width: 1;
+    stroke: #000;
+}

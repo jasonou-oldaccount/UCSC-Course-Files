@@ -1,0 +1,40 @@
+########################################
+# Name: Jason Ou
+# Class: CMPS012M
+# Date: November 16, 2014
+# Filename: BUGS
+# Description: BUGS file to keep track of changed lines
+########################################
+
+================================================================
+line 8-11: 
+
+Combined struct node and *head to define both at the same time.
+Also initialized the pointer *head and assigned it with the value
+NULL.
+================================================================
+line 24-29:
+
+u and v are supposed to be pointers. These pointers are then
+initiated then using malloc, assigned memory space. Removed the
+usage of variable addresses(&) as the new nodes created are now
+already pointers to the addresses.
+================================================================
+line 38-40:
+
+When removing a link, must make sure to free the memory of the
+link being removed. Created a temp node pointing to the link being
+removed then after moving the links around, frees the temp.
+Prevents memory leaks.
+================================================================
+lines 44-54:
+
+Small change to print so that it can print out more than just
+a linked list of size 100.
+================================================================
+lines 57-59:
+
+Changed the destroy function so that it now deallocates all
+memory correctly, one node/link at a time until the list is NULL.
+Makes sure there are no memory leaks.
+================================================================

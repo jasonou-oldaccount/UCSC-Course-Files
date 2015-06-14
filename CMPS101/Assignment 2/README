@@ -1,0 +1,112 @@
+Jason Ou (jaou - 1385128)
+Date: 7 May 2015
+CS101 Spring 2015
+README
+
+***IMPORTANT*** To run all of these tests, do "make testall" ***IMPORTANT***
+
+==================== ABOUT ====================
+This program is a simple implementation of a graph in C.
+
+It able to take in a file and output a graph, a transpose of graphs, 
+and whether the current graph being printed out has a cycle using
+the given input file.
+
+Whenever a graph is outputted, whether it is the original or
+a transposed graph, the user will be prompt with whether the 
+graph has a cycle or not.
+
+This graph has the ability to be transposed as many times as
+the user specifies.
+
+==================== USAGE ====================
+--- There are 6 test files submitted. ---
+
+1. testEmpty.in
+	- File has no edges, only states the number of vertices.
+2. testMultiNodes.in
+	- File tests pushing in multiple edges.
+3. testOneNode.in
+	- File tests for only one edge.
+4. testRepeatNumbers.in
+	- File tests for repeated edges and makes sure they dont get inputted.
+5. testZero.in
+	- File tests for in the case of trying to input 0
+6. testInvalidEdges.in
+	- File tests for invalid edges
+
+--- Other working tests ---
+1. Program will check for invalid file name.
+2. Program will check for no file input.
+3. Program will check within the file if there are invalid edges.
+4. Program will not allow input file to input invalid edges.
+	- Some invalid cases include: (vertex,vertex)
+								   Any input greater than the size or less than 1
+
+==================== Observations for Transpose ====================
+Input file being used: "testTransposeAndCycle.in"
+
+Suppose my original graph prints out like this:
+1 [ 3, 2 ]
+2 [ 3, 4 ]
+3 [NULL]
+4 [ 1 ]
+
+The first transpose of that graph is:
+1 [ 4 ]
+2 [ 1 ]
+3 [ 1, 2 ]
+4 [ 2 ]
+
+Once I transpose the graph a second time, it returns to the original graph:
+1 [ 3, 2 ]
+2 [ 3, 4 ]
+3 [NULL]
+4 [ 1 ]
+
+On the third transpose, I end up with a graph exactly like the first transpose:
+1 [ 4 ]
+2 [ 1 ]
+3 [ 1, 2 ]
+4 [ 2 ]
+
+Observations: Even number of transposes are equal to the original graph, while
+				odd number of transposes would equal to the transpose of the original
+				graph.
+
+==================== Observations for Cycle ====================
+Input file being used: "testTransposeAndCycle.in"
+
+Suppose my original graph prints out like this:
+1 [ 3, 2 ]
+2 [ 3, 4 ]
+3 [NULL]
+4 [ 1 ]
+Graph contains no cycle.
+
+The first transpose of that graph is:
+1 [ 4 ]
+2 [ 1 ]
+3 [ 1, 2 ]
+4 [ 2 ]
+Graph contains a cycle starting at vertex : 4.
+
+Once I transpose the graph a second time, it returns to the original graph:
+1 [ 3, 2 ]
+2 [ 3, 4 ]
+3 [NULL]
+4 [ 1 ]
+Graph contains no cycle.
+
+On the third transpose, I end up with a graph exactly like the first transpose:
+1 [ 4 ]
+2 [ 1 ]
+3 [ 1, 2 ]
+4 [ 2 ]
+Graph contains a cycle starting at vertex : 4.
+
+Observations: Even number of transposes are equal in value of cycle, while odd number
+				of transposes have cycles equal to each other. If the original graph has
+				a cycle, then all the transposes results in having a cycle as well.
+				The returned vertex is in some cycle as it returns the first vertex of
+				the cycle.

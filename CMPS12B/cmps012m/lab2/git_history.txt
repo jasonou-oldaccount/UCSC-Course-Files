@@ -1,0 +1,17 @@
+###########################################
+# Name: Jason Ou
+# Class: CMPS012M
+# Date: October 16, 2014
+# Filename: git_history.txt
+# Description: Git commit history
+############################################
+
+* 1684398 Makefile changed, new commands, runGreet, runGreetings
+* 2283abd README file initial commit, listed files being submitted
+* a96fc8c updated Makefile for greetings.java
+* 9bac35f Updated greetings, greets everyone in directory.txt
+* 1895be7 Makefile changed to work now
+* bafae1c infinite loop greet.java
+* e9f0e18 Initial blank versions of java source files
+* 0cbc024 Add variables to makefile following lab1
+* 377823b Initial commit of a blank Makefile
