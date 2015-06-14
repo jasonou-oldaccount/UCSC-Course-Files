@@ -1,6 +1,5 @@
 # UCSC Course Files
-
-Courses:
+UCSC Courses:
 - CMPE12 (Computer Systems and Assembly Language)
 - CMPS12B (Introduction to Data Structures)
 - CMPS101 (Algorithms and Abstract Data Types)
