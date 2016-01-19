@@ -1,19 +1,11 @@
 package com.example.messiah.tic_tac_toe;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
     boolean win = false;
 
     // keeps track of the scores of the users
-    int player_one_score = 0;
-    int player_two_score = 0;
+    int player_one_score = 0, player_two_score = 0;
 
     // keeps track of how many turns taken
     int turns_taken = 0;
@@ -46,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
         // changes the background image and tag
         changeImage(view);
 
-        // after the user makes a move, checks if it is a winning move
-        checkWin(view);
+        // after the user makes a move, checks if it is a winning move or tie
+        // checks if player won
+        checkPlayerWin(view);
+
+        // checks if it is a tie
+        checkTie(view);
     }
 
     public void changeImage(View view) {
@@ -61,20 +56,12 @@ public class MainActivity extends AppCompatActivity {
             change_image.setImageResource(R.drawable.cross);
             change_image.setTag("X");
             player_one = !player_one;
-            ++turns_taken;
         } else {
             change_image.setImageResource(R.drawable.circle);
             change_image.setTag("O");
             player_one = !player_one;
-            ++turns_taken;
         }
-    }
-
-    public void checkWin(View view) {
-        // checks if player won
-        checkPlayerWin(view);
-        // checks if it is a tie
-        checkTie(view);
+        ++turns_taken;
     }
 
     public void checkPlayerWin(View view) {
@@ -85,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             String tag = (String) child.getTag();
             grid_items[i] = tag;
         }
-
+        // Checks for horizontal wins
         for(int i = 0; i < 7; i += 3) {
             if(grid_items[i] != null && grid_items[i+1] != null && grid_items[i+2] != null) {
                 if(grid_items[i].equals(grid_items[i+1]) && grid_items[i+1].equals(grid_items[i+2])) {
@@ -95,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
+        // Checks for vertical wins
         for(int i = 0; i < 3; ++i) {
             if(grid_items[i] != null && grid_items[i+3] != null && grid_items[i+6] != null) {
                 if(grid_items[i].equals(grid_items[i+3]) && grid_items[i+3].equals(grid_items[i+6])) {
@@ -105,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
+        // Checks for diagonal wins
         for(int i = 0; i < 3; i += 2) {
             if(grid_items[i] != null && grid_items[4] != null && grid_items[8 - i] != null) {
                 if(grid_items[i].equals(grid_items[4]) && grid_items[4].equals(grid_items[8 - i])) {
@@ -129,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView playerOne = (TextView) findViewById(R.id.player_one_score);
                 playerOne.setText(String.valueOf(++player_one_score));
             }
-            winView.setVisibility(winView.VISIBLE);
         }
     }
 
