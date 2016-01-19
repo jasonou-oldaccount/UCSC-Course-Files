@@ -1,4 +1,4 @@
 # UCSC-CMPS121
-UCSC CMPS121 Fall 2015 using Android Programming
+UCSC CMPS121 Winter 2016 using Android Programming
 
 Professor: Luca
