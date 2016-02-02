@@ -1,0 +1,1 @@
+SELECT d.specialty, count(*) AS "Doctors" FROM h_doctors d WHERE d.specialty IS NOT null GROUP BY d.specialty ORDER BY "Doctors" ASC LIMIT 1;

@@ -1,0 +1,1 @@
+SELECT h.name FROM h_medicines h, new_medicines n WHERE h.name = n.name;

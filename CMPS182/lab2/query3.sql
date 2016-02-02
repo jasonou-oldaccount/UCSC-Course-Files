@@ -1,0 +1,1 @@
+SELECT ps.name AS "Patient Names", ds.name AS "Doctor Names" FROM h_patients ps, h_doctors ds, h_prescriptions p WHERE ps.patient_id = p.patient_id AND ds.doctor_id = p.doctor_id GROUP BY ds.name, ps.name ORDER BY "Patient Names", "Doctor Names";

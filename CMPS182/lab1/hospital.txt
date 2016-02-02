@@ -1,0 +1,87 @@
+// NAME:       Jason Ou (ID: JAOU, ID#: 1385128)
+// DATE:       14 Janurary 2016
+// CLASS:      CMPS 182 - Winter 2016
+// ASSIGNMENT: Lab Assignment 1
+// FILE:       hospital.txt
+// SUBMIT:     submit cmps182-sf.w16 lab1 hospital.txt
+
+
+
+// 		  ========== RELATIONS SCHEMA SOLUTION FOR HOSPITAL DATABASE ==========
+
+Patients (patient_id, first_name, last_name, address, email, doctor_id, date_of_record)
+Medicines (medicine_id, name, price, stock)
+Doctors (doctor_id, first_name, last_name, location, specialty)
+Prescriptions (prescription_id, patient_id, doctor_id, medicine_id, date_of_prescription)
+
+
+
+//                    ========== OBSERVATIONS ==========
+
+There are four relations: 
+    Patients, Medicines, Doctors, and Prescriptions.
+    
+The primary key for each relation: 
+    (Patients == patient_id), 
+    (Medicines == medicine_id), 
+    (Doctors == doctor_id), 
+    (Prescriptions == prescription_id)
+    
+The foreign keys for each relation:
+    (Patients == doctor_id),
+    (Prescriptions == patient_id && doctor_id && medicine_id)
+
+
+
+// 				   ========== PROCEDURES AND COMMANDS IN POSTGRESQL ==========
+
+CREATE TABLE PATIENTS (
+    PATIENT_ID      INT         PRIMARY KEY     NOT NULL,
+    FIRST_NAME      CHAR(50)                    NOT NULL,
+    LAST_NAME       CHAR(50)                    NOT NULL,
+    ADDRESS         CHAR(50)                    NOT NULL,
+    EMAIL           CHAR(50)                    NOT NULL,
+    DOCTOR_ID       CHAR(50)                    REFERENCES DOCTORS(DOCTOR_ID),
+    DATE_OF_RECORD  DATE                        NOT NULL
+);
+
+CREATE TABLE MEDICINES (
+    MEDICINE_ID     INT             PRIMARY KEY     NOT NULL,
+    NAME            CHAR(50)                        NOT NULL,
+    PRICE           NUMERIC(50, 2)                  NOT NULL,
+    STOCK           INT                             NOT NULL
+);
+
+CREATE TABLE DOCTORS (
+    DOCTOR_ID       INT         PRIMARY KEY     NOT NULL,
+    FIRST_NAME      CHAR(50)                    NOT NULL,
+    LAST_NAME       CHAR(50)                    NOT NULL,
+    LOCATION        CHAR(50)                    NOT NULL,
+    SPECIALTY       CHAR(50)                    NOT NULL
+);
+
+CREATE TABLE PRESCRIPTIONS (
+    PRESCRIPTION_ID         INT     PRIMARY KEY     NOT NULL,
+    PATIENT_ID              INT                     REFERENCES PATIENTS(PATIENT_ID),
+    DOCTOR_ID               INT                     REFERENCES DOCTORS(DOCTOR_ID),
+    MEDICINE_ID             INT                     REFERENCES MEDICINES(MEDICINE_ID),
+    DATE_OF_PRESCRIPTION    DATE                    NOT NULL
+);
+
+
+
+// 			      ========== RESULTS IN POSTGRESQL ==========
+
+When using the command: \d
+
+        List of relations
+
+Schema | Name          | Type  | Owner
+-------+---------------+-------+------
+public | patients      | table | 
+public | medicines     | table | 
+public | doctors       | table | 
+public | prescriptions | table | 
+
+(4 rows)
+
