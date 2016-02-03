@@ -26,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
     // TextViews for all of the values we want to update
     TextView city;
-    TextView location;
     TextView temperature;
     TextView relativeHumidity;
     TextView windSpeedAverage;
     TextView windSpeedGusts;
     TextView weather;
+    TextView elevation;
 
     // Button to get weather
     Button getWeatherButton;
@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         getWeatherButton = (Button) findViewById(R.id.getWeather);
 
         city = (TextView) findViewById(R.id.cityName);
-        location = (TextView) findViewById(R.id.location);
         temperature = (TextView) findViewById(R.id.temperature);
         relativeHumidity = (TextView) findViewById(R.id.relativeHumidity);
         windSpeedAverage = (TextView) findViewById(R.id.windSpeedAverage);
         windSpeedGusts = (TextView) findViewById(R.id.windSpeedGusts);
         weather = (TextView) findViewById(R.id.weather);
+        elevation = (TextView) findViewById(R.id.elevation);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -68,16 +68,37 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    Toast.makeText(context, "Status(0): Connected, getting data", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Status(0): Checking Request status", Toast.LENGTH_SHORT).show();
                                     JSONObject responseObject = response.getJSONObject("response");
+                                    String result = responseObject.getString("result");
+                                    if (result.equals("error")) {
+                                        Toast.makeText(context, "Status(1): Request status: error, please try again", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    Toast.makeText(context, "Status(0): Connected, getting data", Toast.LENGTH_SHORT).show();
                                     JSONObject conditionObject = responseObject.getJSONObject("conditions");
                                     JSONObject observationLocationObject = conditionObject.getJSONObject("observation_location");
+
+                                    String cityStatus = observationLocationObject.getString("full");
+                                    city.setText("City Name: " + cityStatus);
+
+                                    String elevationStatus = observationLocationObject.getString("elevation");
+                                    elevation.setText("Elevation: " + elevationStatus);
 
                                     String relativeHumidityStatus = conditionObject.getString("relative_humidity");
                                     relativeHumidity.setText("Relative Humidity: " + relativeHumidityStatus);
 
                                     String weatherStatus = conditionObject.getString("weather");
                                     weather.setText("Weather: " + weatherStatus);
+
+                                    String windAvgStatus = conditionObject.getString("wind_mph");
+                                    windSpeedAverage.setText("Wing Speed Average: " + windAvgStatus);
+
+                                    String windGustStatus = conditionObject.getString("wind_gust_mph");
+                                    windSpeedGusts.setText("Wing Speed Gusts: " + windGustStatus);
+
+                                    String temperatureStatus = conditionObject.getString("temp_f");
+                                    temperature.setText("Temperature: " + temperatureStatus + "F");
 
                                     Toast.makeText(context, "Status(0): Data request complete", Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
@@ -90,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, "Status(1): Failed to get data", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Status(1): Failed to get data, try again", Toast.LENGTH_SHORT).show();
                             }
                         });
                 requestQueue.add(jsonObjectRequest);
