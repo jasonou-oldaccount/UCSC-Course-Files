@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView windSpeedGusts;
     TextView weather;
     TextView elevation;
+    TextView state;
 
     // Button to get weather
     Button getWeatherButton;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         windSpeedGusts = (TextView) findViewById(R.id.windSpeedGusts);
         weather = (TextView) findViewById(R.id.weather);
         elevation = (TextView) findViewById(R.id.elevation);
+        state = (TextView) findViewById(R.id.stateName);
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -79,17 +81,20 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject conditionObject = responseObject.getJSONObject("conditions");
                                     JSONObject observationLocationObject = conditionObject.getJSONObject("observation_location");
 
-                                    String cityStatus = observationLocationObject.getString("full");
-                                    city.setText("City Name: " + cityStatus);
+                                    String cityStatus = observationLocationObject.getString("city");
+                                    city.setText(cityStatus);
 
                                     String elevationStatus = observationLocationObject.getString("elevation");
                                     elevation.setText("Elevation: " + elevationStatus);
+
+                                    String stateStatus = observationLocationObject.getString("state");
+                                    state.setText(stateStatus);
 
                                     String relativeHumidityStatus = conditionObject.getString("relative_humidity");
                                     relativeHumidity.setText("Relative Humidity: " + relativeHumidityStatus);
 
                                     String weatherStatus = conditionObject.getString("weather");
-                                    weather.setText("Weather: " + weatherStatus);
+                                    weather.setText(weatherStatus);
 
                                     String windAvgStatus = conditionObject.getString("wind_mph");
                                     windSpeedAverage.setText("Wing Speed Average: " + windAvgStatus);
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                     windSpeedGusts.setText("Wing Speed Gusts: " + windGustStatus);
 
                                     String temperatureStatus = conditionObject.getString("temp_f");
-                                    temperature.setText("Temperature: " + temperatureStatus + "F");
+                                    temperature.setText(temperatureStatus + (char)0x00B0 + "F");
 
                                     Toast.makeText(context, "Status(0): Data request complete", Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
