@@ -1,11 +1,13 @@
 package com.example.messiah.homework2;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Context context = getApplicationContext();
+
         getWeatherButton = (Button) findViewById(R.id.getWeather);
 
         city = (TextView) findViewById(R.id.cityName);
@@ -54,18 +58,30 @@ public class MainActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
+        Toast.makeText(context, "Click Button to get Weather", Toast.LENGTH_SHORT).show();
+
         getWeatherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("FAIL0");
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("http://luca-teaching.appspot.com/weather/default/get_weather", null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    JSONObject jsonObject = response.getJSONObject("response");
-                                    System.out.println(jsonObject.toString());
+                                    Toast.makeText(context, "Status(0): Connected, getting data", Toast.LENGTH_SHORT).show();
+                                    JSONObject responseObject = response.getJSONObject("response");
+                                    JSONObject conditionObject = responseObject.getJSONObject("conditions");
+                                    JSONObject observationLocationObject = conditionObject.getJSONObject("observation_location");
+
+                                    String relativeHumidityStatus = conditionObject.getString("relative_humidity");
+                                    relativeHumidity.setText("Relative Humidity: " + relativeHumidityStatus);
+
+                                    String weatherStatus = conditionObject.getString("weather");
+                                    weather.setText("Weather: " + weatherStatus);
+
+                                    Toast.makeText(context, "Status(0): Data request complete", Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
+                                    Toast.makeText(context, "Status(1): Failed to get data", Toast.LENGTH_SHORT).show();
                                     e.printStackTrace();
                                 }
 
@@ -74,10 +90,11 @@ public class MainActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                System.out.println("FAIL");
+                                Toast.makeText(context, "Status(1): Failed to get data", Toast.LENGTH_SHORT).show();
                             }
                         });
                 requestQueue.add(jsonObjectRequest);
+                Toast.makeText(context, "Status(0): Data requesting", Toast.LENGTH_SHORT).show();
             }
         });
     }
