@@ -11,6 +11,7 @@
 
     <style name="MyTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">#FFF</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
     </style>
 
 </resources>
