@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.messiah.heyneighbor.ChatActivity"
+    android:background="#9a80e5" >
+    
+    <TextView
+        android:id="@+id/chat_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:background="#fff"
+        android:textColor="#9a80e5"
+        android:textSize="20sp"
+        android:gravity="center_vertical"/>
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/refresh_button_actions"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/message_to_send"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="60dp"
+        android:background="#fff"
+        android:padding="10dp"
+        android:textColorHint="#9a80e5"
+        android:hint="Enter Message"
+        android:textCursorDrawable="@drawable/edit_text_purple_cursor"
+        android:textColor="#9a80e5"/>
+    
+    <ImageButton
+        android:id="@+id/send_message"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/send_button_actions"
+        android:onClick="sendMessage" />
+
+</RelativeLayout>

@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, "Status(1): Failed to get data, try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Status(1): Error 500, Server Failed, please try again", Toast.LENGTH_SHORT).show();
                             }
                         });
                 // requests data

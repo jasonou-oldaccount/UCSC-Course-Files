@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.messiah.heyneighbor.MainActivity"
+    android:background="#9a80e5"
+    android:weightSum="2"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relative_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/icon_t"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <EditText
+            android:id="@+id/nickname_field"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:hint=" Enter Nickname"
+            android:background="@drawable/rectangle_colored"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/start_chat_button"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="Start Chat"
+            android:background="@drawable/button_when_actions"
+            android:onClick="startChat"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/nickname_field"
+            android:layout_marginTop="25dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
