@@ -22,7 +22,8 @@
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:background="@drawable/refresh_button_actions"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:onClick="refreshChat"/>
 
     <EditText
         android:id="@+id/message_to_send"
