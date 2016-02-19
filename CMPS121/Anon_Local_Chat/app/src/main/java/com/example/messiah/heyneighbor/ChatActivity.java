@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ import org.json.JSONObject;
 import java.util.Random;
 
 public class ChatActivity extends Activity {
+
+    ImageView unchecked;
+    ImageView checked;
 
     LocationListener locationListener;
     LocationManager locationManager;
@@ -81,6 +85,7 @@ public class ChatActivity extends Activity {
                 if(!location_found) {
                     location_found = true;
                     Toast.makeText(context, "Location Found", Toast.LENGTH_SHORT).show();
+                    refreshChat(null);
                 }
             }
 
@@ -93,6 +98,9 @@ public class ChatActivity extends Activity {
             @Override
             public void onProviderDisabled(String provider) {}
         };
+
+        unchecked = (ImageView) findViewById(R.id.unchecked_icon);
+        checked = (ImageView) findViewById(R.id.checked_icon);
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
@@ -145,7 +153,12 @@ public class ChatActivity extends Activity {
         String randomLetters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int n = 0; n < 10; ++n) message_id += randomLetters.charAt(rnd.nextInt(randomLetters.length()));
 
-        chatArrayAdapter.add(new ChatMessage(true, message, nickname));
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+
+        chatArrayAdapter.add(new ChatMessage(true, message, nickname, ts));
+
+        unchecked.setVisibility(view.VISIBLE);
 
         String URL_POST = BASE_URL_POST + "lat=" + latitude + "&lng=" + longitude + "&user_id=" + user_id + "&nickname=" + nickname + "&message=" + message + "&message_id=" + message_id;
 
@@ -181,9 +194,13 @@ public class ChatActivity extends Activity {
 
         // requests data
         requestQueue.add(jsonObjectRequest);
+        unchecked.setVisibility(view.INVISIBLE);
+        checked.setVisibility(view.VISIBLE);
 
         if(message != "") {
             messageToSend.setText("");
+            unchecked.setVisibility(view.INVISIBLE);
+            checked.setVisibility(view.INVISIBLE);
         }
     }
 
@@ -227,7 +244,7 @@ public class ChatActivity extends Activity {
                                 JSONObject curr = result_list.getJSONObject(i);
                                 boolean checkUser = false;
                                 if(curr.getString("user_id").equals(String.valueOf(user_id))) checkUser = true;
-                                chatArrayAdapter.add(new ChatMessage(checkUser, curr.getString("message"), curr.getString("nickname")));
+                                chatArrayAdapter.add(new ChatMessage(checkUser, curr.getString("message"), curr.getString("nickname"), curr.getString("timestamp")));
                             }
 
                             // tells the user complete

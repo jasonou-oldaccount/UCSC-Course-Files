@@ -36,6 +36,24 @@
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"></ListView>
 
+    <ImageView
+        android:id="@+id/unchecked_icon"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/unchecked"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/checked_icon"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/checked"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:visibility="invisible"/>
+
     <EditText
         android:id="@+id/message_to_send"
         android:layout_width="match_parent"
