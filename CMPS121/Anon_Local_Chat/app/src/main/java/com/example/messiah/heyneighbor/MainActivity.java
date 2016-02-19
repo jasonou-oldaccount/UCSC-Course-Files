@@ -12,9 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     public static String nickname = null;
+    public static int user_id;
 
     LocationManager lm;
 
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void startChat(View view) {
         EditText nickname_field = (EditText) findViewById(R.id.nickname_field);
         nickname = nickname_field.getText().toString();
+        Random r = new Random();
+        user_id = r.nextInt(101 - 0);
 
         checkLocationStatus();
 

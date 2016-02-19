@@ -25,6 +25,17 @@
         android:gravity="center"
         android:onClick="refreshChat"/>
 
+    <ListView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="65dp"
+        android:layout_below="@id/chat_action_bar"
+        android:id="@+id/msgview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"></ListView>
+
     <EditText
         android:id="@+id/message_to_send"
         android:layout_width="match_parent"

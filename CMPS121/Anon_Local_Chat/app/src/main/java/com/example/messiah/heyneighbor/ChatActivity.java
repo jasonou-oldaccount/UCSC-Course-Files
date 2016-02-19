@@ -2,14 +2,15 @@ package com.example.messiah.heyneighbor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,9 +43,15 @@ public class ChatActivity extends Activity {
 
     int backButtonCount = 0;
 
+    String nickname = MainActivity.nickname;
+    int user_id = MainActivity.user_id;
+
     Context context;
 
     RequestQueue requestQueue;
+
+    private ChatArrayAdapter chatArrayAdapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,7 @@ public class ChatActivity extends Activity {
         requestQueue = Volley.newRequestQueue(this);
 
         TextView action_bar = (TextView) findViewById(R.id.chat_action_bar);
-        action_bar.setText("Chatting as " + MainActivity.nickname.toUpperCase());
+        action_bar.setText("Chatting as " + nickname.toUpperCase());
 
         if(!location_found) Toast.makeText(context, "Finding location... please wait", Toast.LENGTH_SHORT).show();
 
@@ -89,6 +96,19 @@ public class ChatActivity extends Activity {
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+        listView = (ListView) findViewById(R.id.msgview);
+        chatArrayAdapter = new ChatArrayAdapter(context, R.layout.right);
+        listView.setAdapter(chatArrayAdapter);
+
+        //to scroll the list view to bottom on data change
+        chatArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                listView.setSelection(chatArrayAdapter.getCount() - 1);
+            }
+        });
     }
 
     @Override
@@ -125,7 +145,9 @@ public class ChatActivity extends Activity {
         String randomLetters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int n = 0; n < 10; ++n) message_id += randomLetters.charAt(rnd.nextInt(randomLetters.length()));
 
-        String URL_POST = BASE_URL_POST + "lat=" + latitude + "&lng=" + longitude + "&user_id=1&nickname=" + MainActivity.nickname + "&message=" + message + "&message_id=" + message_id;
+        chatArrayAdapter.add(new ChatMessage(true, message, nickname));
+
+        String URL_POST = BASE_URL_POST + "lat=" + latitude + "&lng=" + longitude + "&user_id=" + user_id + "&nickname=" + nickname + "&message=" + message + "&message_id=" + message_id;
 
         URL_POST = URL_POST.replaceAll(" ", "%20");
 
@@ -153,7 +175,7 @@ public class ChatActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Status(1): Failed to get data, try again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Status(1): Failed to send message, try again", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -177,6 +199,9 @@ public class ChatActivity extends Activity {
         checkLocationStatus();
         if(!gps_enabled || !network_enabled || !location_found) return;
 
+        chatArrayAdapter = new ChatArrayAdapter(context, R.layout.right);
+        listView.setAdapter(chatArrayAdapter);
+
         String URL_GET = BASE_URL_GET + "lat=" + latitude + "&lng=" + longitude;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_GET, null,
@@ -199,6 +224,10 @@ public class ChatActivity extends Activity {
 
                             for(int i = result_list.length()-1; i >= 0; --i) {
                                 System.out.println(result_list.getJSONObject(i));
+                                JSONObject curr = result_list.getJSONObject(i);
+                                boolean checkUser = false;
+                                if(curr.getString("user_id").equals(String.valueOf(user_id))) checkUser = true;
+                                chatArrayAdapter.add(new ChatMessage(checkUser, curr.getString("message"), curr.getString("nickname")));
                             }
 
                             // tells the user complete
